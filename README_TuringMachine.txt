@@ -1,44 +1,33 @@
+Uso
 
-# Simulador de Máquina de Turing (CLI)
+Executar no terminal:
 
-**Uso:**  
-```bash
-python tm.py <especificacao.json> <entrada.in> <saida.txt>
-```
+python tm.py <arquivo.json> <entrada.in> <saida.txt>
 
-A saída no **stdout** é `1` (aceita) ou `0` (rejeita).  
-O arquivo indicado em `<saida.txt>` recebe **apenas a região não-branca** da fita final (sem espaços extras).
 
-## Formato JSON esperado
-```json
-{
-  "initial": 0,
-  "final": [4],
-  "white": "_",
-  "transitions": [
-    {"from":0,"to":1,"read":"a","write":"A","dir":"R"},
-    {"from":1,"to":1,"read":"a","write":"a","dir":"R"}
-  ]
-}
-```
-- `dir`: `L` (esquerda), `R` (direita), `S`/`N` (sem mover).
+Exemplo:
 
-## Entradas (.in / .txt)
-- O simulador lê o arquivo como **texto** (tenta UTF‑8, cai para Latin‑1).  
-- Quebras de linha das pontas são removidas. Se o Classroom mostrar “Binário”, ainda assim funcionará.
+python tm.py duplo_bal.json duplobal.in saida_duplobal.txt
 
-## Exemplos (Windows PowerShell)
-```powershell
-python tm.py duplo_bal.json duplobal.in duplobal.out.txt
-python tm.py igualdade.json duplobal2.in duplobal2.out.txt
-python tm.py igualdade.json duplobal3.in duplobal3.out.txt
-```
 
-## Dicas
-- Se sua MT entrar em **loop**, use `--max-steps` para travar a execução e depurar.
-- Para investigar, rode com `--debug` (imprime estado/cabeçote a cada passo).
+O programa imprime no console:
 
-## Saída
-- **stdout**: `1` (aceita) ou `0` (rejeita)
-- **arquivo**: conteúdo não-branco da fita final
-```
+1 se a entrada for aceita
+
+0 se a entrada for rejeitada
+
+A fita final é salva no arquivo de saída (.txt).
+
+Arquivos
+
+tm.py: simulador principal
+
+duplo_bal.json e igualdade.json: especificações das máquinas
+
+duplobal.in, duplobal2.in, duplobal3.in: entradas de teste
+
+saida_*.txt: fitas resultantes
+
+Observação
+
+Se a saída gerar uma linha muito grande (como vários "a"), isso ocorre porque a máquina continua processando símbolos sem encontrar uma condição de parada.
